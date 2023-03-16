@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import './App.css'
+import confetti from 'canvas-confetti'
 
 const TURNS = {
   X: 'x',
@@ -86,6 +87,7 @@ function App() {
     // Check if there is a winner
     const newWinner = checkWinner(newBoard)
     if(newWinner) {
+      confetti()
       setWinner(newWinner)
     }
     // there is a tie?
