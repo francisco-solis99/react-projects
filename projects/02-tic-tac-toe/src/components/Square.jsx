@@ -1,13 +1,10 @@
 
-
-export  function Square({ children, index, isSelected = false, updateBoard }) {
-
+export function Square ({ children, index, isSelected = false, updateBoard }) {
   const classNameSquare = isSelected ? 'square is-selected' : 'square'
 
-  function handleClick() {
+  function handleClick () {
     updateBoard(index)
   }
-
 
   return (
     <div onClick={handleClick} className={classNameSquare}>
