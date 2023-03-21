@@ -2,55 +2,63 @@ import React, { useState } from 'react'
 import './App.css'
 import confetti from 'canvas-confetti'
 
-import { Square }  from './components/Square'
+import { Square } from './components/Square'
 import { Winner } from './components/Winner'
 import { TURNS } from './constants'
 import { checkGameEnded, checkWinner } from './logic/board'
+import { saveGameStorage, resetGameStorage } from './logic/storage'
 
+// TODO: componetized the board, the winner and the turn section and use the useEffect to save the game when change the turn or change the board
 
-
-
-function App() {
-
-  const [board, setBoard] = useState(Array(9).fill(null))
-  const [turn, setTurn] = useState(TURNS.X)
+function App () {
+  // Board state
+  // when you use a callback in the useState, that Callback returns the value you wanted in that state
+  const [board, setBoard] = useState(() => {
+    // When you wanna initialice this state just one time you nee to check the local storage
+    const prevBoard = window.localStorage.getItem('board')
+    if (!prevBoard) return Array(9).fill(null)
+    return JSON.parse(prevBoard)
+  })
+  // Turn state
+  const [turn, setTurn] = useState(() => {
+    const prevTurn = window.localStorage.getItem('turn')
+    return prevTurn ?? TURNS.X
+  })
+  // Winner state
   const [winner, setWinner] = useState(null)
-
 
   // Reset the game
   const resetGame = () => {
     setBoard(Array(9).fill(null))
     setWinner(null)
     setTurn(TURNS.X)
+
+    resetGameStorage()
   }
 
   // Update the board
-  function updateBoard(index) {
-
+  function updateBoard (index) {
     // check if there is a winner or the square is occupied
     if (board[index] || winner) return
 
     // Update the board
     const newBoard = [...board]
-    newBoard[index] = turn;
-    setBoard(newBoard);
+    newBoard[index] = turn
+    setBoard(newBoard)
 
     // Check if there is a winner
     const newWinner = checkWinner(newBoard)
-    if(newWinner) {
+    if (newWinner) {
       confetti()
       setWinner(newWinner)
-    }
-    // there is a tie?
-    else if(checkGameEnded(newBoard)) {
+    } else if (checkGameEnded(newBoard)) { // there is a tie?
       setWinner(false)
-      return
     }
     // Update the turn
     const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X
     setTurn(newTurn)
+    saveGameStorage({ board: newBoard, turn: newTurn })
   }
-
 
   return (
     <main className='board'>
@@ -78,9 +86,8 @@ function App() {
         <Square isSelected={turn === TURNS.O}>{TURNS.O}</Square>
       </section>
 
-
       {/* Winner modal */}
-      <Winner winner={winner} resetGame={resetGame}/>
+      <Winner winner={winner} resetGame={resetGame} />
 
     </main>
   )
