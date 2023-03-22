@@ -1,6 +1,7 @@
 {
   "conventionalCommits.scopes": [
     "Root",
-    "02-tic-tac-toe"
+    "02-tic-tac-toe",
+    "03-mouse-follwer"
   ]
 }
