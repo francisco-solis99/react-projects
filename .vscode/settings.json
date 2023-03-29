@@ -2,6 +2,7 @@
   "conventionalCommits.scopes": [
     "Root",
     "02-tic-tac-toe",
-    "03-mouse-follwer"
+    "03-mouse-follwer",
+    "04-Test-Technique"
   ]
 }
