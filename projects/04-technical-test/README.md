@@ -6,6 +6,6 @@
 
 ## User stories
 
-- [] Recupera umn hecho aleatorio de gatos de la primera API
-- [] Recupera la primera palabra del hecho
-- [] Muestra una imagen de un gato con la primera imagen
+- [✔️] Recupera umn hecho aleatorio de gatos de la primera API
+- [✔️] Recupera la primera palabra del hecho
+- [✔️] Muestra una imagen de un gato con la primera imagen
