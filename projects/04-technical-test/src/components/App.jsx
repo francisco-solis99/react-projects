@@ -7,7 +7,7 @@ const API_CATS = 'https://cataas.com/cat/says'
 export default function App () {
   const [fact, setFact] = useState(null)
   const [catImageSrc, setCatImageSrc] = useState(null)
-  const [isChangeFact, isSetChangeFact] = useState(false)
+  const [isChangeFact, isSetChangeFact] = useState(true)
 
   useEffect(() => {
     const getRandomFact = async () => {
@@ -19,12 +19,13 @@ export default function App () {
         console.log(error)
       }
     }
-    getRandomFact()
+
+    if (isChangeFact) getRandomFact()
   }, [isChangeFact])
 
   useEffect(() => {
+    if (!fact) return
     const getCatImage = async () => {
-      if (fact) {
         try {
           const firstWordFact = fact.split(' ')[0]
           const response = await fetch(`${API_CATS}/${firstWordFact}`)
@@ -33,9 +34,11 @@ export default function App () {
         } catch (error) {
           console.log(error)
         }
-      }
     }
     getCatImage()
+    setTimeout(() => {
+      isSetChangeFact(false)
+    }, 2000)
   }, [fact])
 
   const isImageLoading = catImageSrc === null || isChangeFact
@@ -44,14 +47,16 @@ export default function App () {
     <>
       <main className='container'>
         <p className='label__fact'>My random fact</p>
-        <p className='fact'>{fact}</p>
-        {
-          isImageLoading
-            ? <span className='loader' />
-            : <picture className='fact__cat-picture'>
-              <img src={catImageSrc} alt={`Cat image says ${fact}`} className='fact__cat-img' />
-            </picture>
-        }
+        {fact && <p className='fact'>{fact}</p>}
+        <div className=''>
+          {
+            isImageLoading
+              ? <span className='loader' />
+              : <picture className='fact__cat-picture'>
+                <img src={catImageSrc} alt={`Cat image says ${fact}`} className='fact__cat-img' />
+              </picture>
+          }
+        </div>
         <button className='fact__button' onClick={() => { isSetChangeFact(true) }}>Change cat-fact</button>
       </main>
     </>
