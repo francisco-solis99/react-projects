@@ -28,6 +28,14 @@
   padding: 2em;
 }
 
+.container div {
+  margin-top: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .label__fact {
   text-align: center;
   font-size: 2rem;
@@ -50,6 +58,7 @@
   max-width: 400px;
   border-radius: 0.25em;
   overflow: hidden;
+  transition: all ease-in-out 150ms;
 }
 
 .fact__cat-img {
@@ -95,5 +104,9 @@
 }
 
 .fact__button:hover {
+  filter: drop-shadow(0 0 0.45rem papayawhip);
+}
+
+.fact__cat-picture:hover {
   filter: drop-shadow(0 0 0.45rem papayawhip);
 }
