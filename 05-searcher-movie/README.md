@@ -2,11 +2,12 @@
 
 ### Use the next API:
 - https://www.omdbapi.com/
-- API_KEY: 4287ad07
+- API_KEY: c1b45680
 
-## Requieretments:
+## Requierements:
 - [✅] You need to show a input to search the movie and a button to search
-- [] Enlist the found movies and show the title, year and the poster
+- [✅] Enlist movies and show the title, year and the poster statically
+- [] Enlist the found movies and show the title, year and the poster dinamically
 - [] The movies have to be show them in a responsive grid
 
 
