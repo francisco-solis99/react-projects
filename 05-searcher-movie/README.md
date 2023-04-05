@@ -5,9 +5,9 @@
 - API_KEY: 4287ad07
 
 ## Requieretments:
-- You need to show on a input to search the movie and a button to search
-- Enlist the found movies and show the title, year and the poster
-- The movies have to be show them in a responsive grid
+- [✅] You need to show a input to search the movie and a button to search
+- [] Enlist the found movies and show the title, year and the poster
+- [] The movies have to be show them in a responsive grid
 
 
 ## First iteration
