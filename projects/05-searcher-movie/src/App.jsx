@@ -10,6 +10,13 @@ import { Movies } from './components/Movies'
 function App () {
   const movies = responseMovies.Search
 
+  const mappedMovies = movies.map(movie => ({
+    id: movie.imdbID,
+    title: movie.Title,
+    year: movie.Year,
+    image: movie.Poster
+  }))
+
   return (
     <div className='wrapper'>
       <header>
@@ -21,7 +28,7 @@ function App () {
       </header>
 
       <main>
-        <Movies movies={movies} />
+        <Movies movies={mappedMovies} />
       </main>
     </div>
   )
