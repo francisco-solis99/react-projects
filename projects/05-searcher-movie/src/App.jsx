@@ -1,21 +1,12 @@
 import React from 'react'
 import './App.css'
 
-import responseMovies from './mocks/with_results.json'
-// import withoutMovies from './mocks/without_results.json'
-
 // Components
 import { Movies } from './components/Movies'
+import { useMovies } from './hooks/useMovies'
 
 function App () {
-  const movies = responseMovies.Search
-
-  const mappedMovies = movies.map(movie => ({
-    id: movie.imdbID,
-    title: movie.Title,
-    year: movie.Year,
-    image: movie.Poster
-  }))
+  const { movies } = useMovies()
 
   return (
     <div className='wrapper'>
@@ -28,7 +19,7 @@ function App () {
       </header>
 
       <main>
-        <Movies movies={mappedMovies} />
+        <Movies movies={movies} />
       </main>
     </div>
   )
