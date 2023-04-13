@@ -6,7 +6,6 @@ export function useSearch () {
   const isFirstTimeInput = useRef(true)
 
   useEffect(() => {
-    console.log(isFirstTimeInput.current)
     if (isFirstTimeInput.current) {
       isFirstTimeInput.current = query === ''
       return

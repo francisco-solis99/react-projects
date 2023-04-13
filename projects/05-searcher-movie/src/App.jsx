@@ -9,12 +9,13 @@ import { useSearch } from './hooks/useSearch'
 import { useMovies } from './hooks/useMovies'
 
 function App () {
-  const { movies } = useMovies()
   const { query, setQuery, error } = useSearch()
+  const { movies, getMovies, loading } = useMovies({ query })
 
   const handleSubmit = (event) => {
     event.preventDefault()
     console.log({ query })
+    getMovies({ query })
   }
 
   const handleChangeQuery = (event) => {
@@ -38,7 +39,9 @@ function App () {
       </header>
 
       <main>
-        <Movies movies={movies} />
+        {
+          loading ? <p>Cargando...</p> : <Movies movies={movies} />
+        }
       </main>
     </div>
   )
