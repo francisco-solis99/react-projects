@@ -8,6 +8,10 @@ main, form {
   justify-content: center;
 }
 
+h1 {
+  text-align: center;
+}
+
 
 main {
   width: 90%;
@@ -24,4 +28,8 @@ main {
   width: 100%;
   grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
   gap: 2.25em;
+}
+
+.movies__list {
+  margin: 0.25em 0;
 }
