@@ -22,6 +22,7 @@ function App () {
   const handleChangeQuery = (event) => {
     const newQuery = event.target.value
     setQuery(newQuery)
+    getMovies({ query: newQuery })
   }
 
   const handleChangeSort = () => setSort(!sort)
