@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './App.css'
 
 // Components
@@ -9,8 +9,9 @@ import { useSearch } from './hooks/useSearch'
 import { useMovies } from './hooks/useMovies'
 
 function App () {
+  const [sort, setSort] = useState(false)
   const { query, setQuery, error } = useSearch()
-  const { movies, getMovies, loading } = useMovies({ query })
+  const { movies, getMovies, loading } = useMovies({ query, sort })
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -23,6 +24,8 @@ function App () {
     setQuery(newQuery)
   }
 
+  const handleChangeSort = () => setSort(!sort)
+
   // Use the form in a controlled way (by the state) perhaps you can use the uncontrolled way which is in most of the cases better
 
   return (
@@ -31,6 +34,7 @@ function App () {
         <h1>Searcher Movies 🍿</h1>
         <form onSubmit={handleSubmit}>
           <input type='text' onChange={handleChangeQuery} value={query} placeholder='Avengers, Star Wars, The matrix' />
+          <input type='checkbox' onChange={handleChangeSort} />
           <button type='submit'>Search</button>
         </form>
         {

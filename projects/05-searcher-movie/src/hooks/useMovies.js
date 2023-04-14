@@ -1,13 +1,14 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useMemo, useCallback } from 'react'
 import { searchMovies } from '../services/movies'
 
-export function useMovies ({ query }) {
+export function useMovies ({ query, sort }) {
   const [movies, setMovies] = useState([])
   const [loading, setLoading] = useState(false)
   const previousQuery = useRef(query)
 
-  const getMovies = async () => {
-    // void to search both or more times the same query search
+  const getMovies = useCallback(async ({ query }) => {
+    console.log('getting movies')
+    // Avoid to search both or more times the same query search
     if (query === previousQuery.current) return
     try {
       setLoading(true)
@@ -20,7 +21,15 @@ export function useMovies ({ query }) {
     } finally {
       setLoading(false)
     }
-  }
+  }, [])
 
-  return { movies, getMovies, loading }
+  // useMemo allow memoiazate such computing that we want to avoid execute it at less the dependencies that we defined has been changed
+  // ensure useMmeo really has sense because improve the performace
+  const sortedMovies = useMemo(() => {
+    return sort
+    ? [...movies].sort((a, b) => a.title.localeCompare(b.title))
+    : movies
+  }, [sort, movies]) // just compute this code when the sprt and movies depndencies change
+
+  return { movies: sortedMovies, getMovies, loading, sort }
 }
