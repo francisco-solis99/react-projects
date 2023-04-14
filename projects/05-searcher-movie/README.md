@@ -12,6 +12,6 @@
 
 
 ## First iteration
-- Avoid the search both times the same query search
+[✅] Avoid the search both times the same query search
 - Make the search automatically when you write
 - Avoid the continous searching when you write
