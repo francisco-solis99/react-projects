@@ -12,7 +12,7 @@ export function useMovies ({ query, sort }) {
     if (query === previousQuery.current) return
     try {
       setLoading(true)
-      // Save the ref (the useRef does not chane between renders and does no make the component render again)
+      // Save the ref (the useRef does not change between renders and does no make the component render again)
       previousQuery.current = query
       const movies = await searchMovies({ query })
       setMovies(movies)
