@@ -1,24 +1,21 @@
 import { useEffect, useState } from 'react'
 
-const API_CATS = 'https://cataas.com/cat/says'
+import { getCatImage } from '../services/catImage'
 
 export function useCatImageUrl ({ fact }) {
   const [catImageUrl, setCatImageUrl] = useState(null)
+  const [isImageLoading, setIsImageLoading] = useState(true)
 
-  console.log('render')
   useEffect(() => {
     if (!fact) return
-    const getCatImage = async () => {
-        try {
-          const firstThreeWordFact = fact.split(' ').slice(0, 3).join(' ')
-          const response = await fetch(`${API_CATS}/${firstThreeWordFact}`)
-          const { url } = response
-          setCatImageUrl(url)
-        } catch (error) {
-          console.log(error)
-        }
-    }
-    getCatImage()
+
+    setIsImageLoading(true)
+    getCatImage({ fact }).then(newImageUrl => {
+      setCatImageUrl(newImageUrl)
+      setTimeout(() => {
+        setIsImageLoading(false)
+      }, 300)
+    })
   }, [fact])
-  return { catImageUrl }
+  return { catImageUrl, isImageLoading }
 }
