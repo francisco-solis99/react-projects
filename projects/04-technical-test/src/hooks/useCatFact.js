@@ -8,8 +8,6 @@ export function useCatFact () {
     getRandomFact().then(newFact => setFact(newFact))
   }
 
-  console.log('render 👀')
-
   useEffect(() => {
     getCatFact()
   }, [])
